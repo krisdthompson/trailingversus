@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block extra_css %}
+<style>
+:root {
+    --texas-brown: #8B4513;
+    --texas-sand: #DAA520;
+    --texas-cedar: #6B4423;
+    --texas-earth: #964B00;
+    --texas-sky: #87CEEB;
+}
+
+body {
+    background-color: var(--texas-sand);
+    background-image: url('https://www.transparenttextures.com/patterns/leather.png');
+}
+
+.poem-container {
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid var(--texas-brown);
+    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.2);
+}
+
+.poem-title {
+    color: var(--texas-cedar);
+    font-family: 'Georgia', serif;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid var(--texas-earth);
+    padding-bottom: 0.5rem;
+}
+
+.poem-line {
+    background-color: rgba(255, 253, 245, 0.9);
+    border: 1px solid var(--texas-brown) !important;
+    border-radius: 8px;
+    position: relative;
+}
+
+.poem-line::before {
+    content: '🌵';
+    position: absolute;
+    left: -25px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.btn-primary {
+    background-color: var(--texas-cedar) !important;
+    border-color: var(--texas-earth) !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--texas-earth) !important;
+    border-color: var(--texas-brown) !important;
+}
+
+.btn-outline-primary {
+    color: var(--texas-cedar) !important;
+    border-color: var(--texas-cedar) !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--texas-cedar) !important;
+    color: white !important;
+}
+
+.form-control:focus {
+    border-color: var(--texas-brown);
+    box-shadow: 0 0 0 0.25rem rgba(139, 69, 19, 0.25);
+}
+
+.badge {
+    background-color: var(--texas-cedar) !important;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="poem-container p-4 rounded">
+                <h2 class="poem-title mb-4">
+                    <i class="bi bi-journal-text me-2"></i>
+                    {% if form.instance.pk %}Edit{% else %}Create{% endif %} Your Trail Verse
+                </h2>
+                {% crispy form %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function countSyllables(word) {
+    word = word.toLowerCase();
+    word = word.replace(/[^a-zA-Z ]/g, "");
+    if(word.length <= 3) { return 1; }
+    word = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '');
+    word = word.replace(/^y/, '');
+    return word.match(/[aeiouy]{1,2}/g)?.length || 0;
+}
+
+function updateSyllableCount(lineElement) {
+    const textInput = lineElement.querySelector('input[type="text"]');
+    const syllableDisplay = lineElement.querySelector('.syllable-count');
+    const overrideCheck = lineElement.querySelector('.override-check');
+    const syllableInput = lineElement.querySelector('.syllable-input input');
+
+    if (!overrideCheck.checked) {
+        const text = textInput.value;
+        const words = text.trim().split(/\s+/);
+        const totalSyllables = words.reduce((sum, word) => sum + countSyllables(word), 0);
+        syllableDisplay.textContent = totalSyllables;
+        syllableInput.value = totalSyllables;
+    }
+}
+
+function setupLine(lineElement) {
+    const textInput = lineElement.querySelector('input[type="text"]');
+    const overrideCheck = lineElement.querySelector('.override-check');
+    const syllableInput = lineElement.querySelector('.syllable-input');
+
+    textInput.addEventListener('input', () => updateSyllableCount(lineElement));
+
+    overrideCheck.addEventListener('change', function() {
+        syllableInput.classList.toggle('d-none', !this.checked);
+    });
+
+    syllableInput.querySelector('input').addEventListener('input', function() {
+        lineElement.querySelector('.syllable-count').textContent = this.value;
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Setup existing lines
+    document.querySelectorAll('.poem-line').forEach(setupLine);
+
+    // Setup add line button with custom icon
+    const addLineBtn = document.getElementById('add-line');
+    if (addLineBtn) {
+        addLineBtn.innerHTML = '<i class="bi bi-plus-circle-fill me-2"></i> Add Another Verse';
+    }
+
+    // Update submit button
+    const submitBtn = document.querySelector('input[type="submit"]');
+    if (submitBtn) {
+        const newBtn = document.createElement('button');
+        newBtn.type = 'submit';
+        newBtn.className = submitBtn.className;
+        newBtn.innerHTML = '<i class="bi bi-save2-fill me-2"></i> Save Your Poem';
+        submitBtn.parentNode.replaceChild(newBtn, submitBtn);
+    }
+});
+</script>
+{% endblock %} 

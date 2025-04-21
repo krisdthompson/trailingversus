@@ -22,7 +22,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'whitenoise.runserver_nostatic',
-    'poems.apps.PoemsConfig',
+    'versus.apps.VersusConfig',
+    'crispy_forms',
+    'crispy_bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -37,7 +39,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'elegy.urls'
+ROOT_URLCONF = 'trailing.urls'
 
 TEMPLATES = [
     {
@@ -55,7 +57,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'elegy.wsgi.application'
+WSGI_APPLICATION = 'trailverses.wsgi.application'
 
 # Database
 DATABASES = {
@@ -99,4 +101,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Debug Toolbar
 INTERNAL_IPS = [
     '127.0.0.1',
-] 
+]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"

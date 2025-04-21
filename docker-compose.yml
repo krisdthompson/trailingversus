@@ -1,5 +1,5 @@
 services:
-  elegy:
+  trailverses:
     build: 
       context: .
     env_file:
@@ -10,7 +10,7 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - $PWD/elegy:/opt/app
+      - $PWD/webapp:/opt/app
       - db:/opt/db
       - static:/opt/static
 volumes:
