@@ -1,0 +1,18 @@
+services:
+  elegy:
+    build: 
+      context: .
+    env_file:
+      - env/django.env
+    entrypoint: /opt/docker-entrypoint.sh
+    command: python manage.py runserver 0.0.0.0:8000
+    restart: unless-stopped
+    ports:
+      - 8000:8000
+    volumes:
+      - $PWD/elegy:/opt/app
+      - db:/opt/db
+      - static:/opt/static
+volumes:
+  db:  # Persistent volume for SQLite database
+  static:  # Persistent volume for static files 
