@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="mb-4 d-flex justify-content-between">
+                <a href="{% url 'poems:list' %}" class="btn btn-outline-secondary">&larr; Back to Poems</a>
+                <a href="{% url 'poems:edit' poem.pk %}" class="btn btn-primary">
+                    <i class="bi bi-pencil"></i> Edit Poem
+                </a>
+            </div>
+            
+            <article class="bg-white p-4 rounded shadow-sm">
+                <h1 class="display-4 mb-3">{{ poem.title }}</h1>
+                
+                <div class="text-muted mb-4">
+                    <small>Created: {{ poem.created_at|date:"F d, Y" }}</small>
+                    {% if poem.updated_at != poem.created_at %}
+                        <small class="ms-3">Updated: {{ poem.updated_at|date:"F d, Y" }}</small>
+                    {% endif %}
+                </div>
+                
+                <div class="poem-content">
+                    {% for line in poem.lines.all %}
+                    <div class="poem-line mb-3">
+                        <div class="d-flex align-items-center">
+                            <div class="me-3 flex-grow-1">{{ line.content }}</div>
+                            <div class="text-muted small">
+                                <span class="badge {% if line.is_syllable_override %}bg-warning{% else %}bg-secondary{% endif %}">
+                                    {{ line.syllable_count }} syllables
+                                    {% if line.is_syllable_override %}(overridden){% endif %}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    {{ poem.content|linebreaks }}
+                    {% endfor %}
+                </div>
+            </article>
+        </div>
+    </div>
+</div>
+{% endblock %} 
