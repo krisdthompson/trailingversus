@@ -1,0 +1,8 @@
+{% load crispy_forms_field %}
+
+<div class="form-check">
+    {% crispy_field field %}
+    {% if field.help_text %}
+        <small id="hint_{{ field.auto_id }}" class="form-text text-muted">{{ field.help_text }}</small>
+    {% endif %}
+</div> 

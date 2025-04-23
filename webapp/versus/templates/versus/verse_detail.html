@@ -1,106 +1,19 @@
 {% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
 
 {% block extra_css %}
-<style>
-:root {
-    --texas-brown: #8B4513;
-    --texas-sand: #DAA520;
-    --texas-cedar: #6B4423;
-    --texas-earth: #964B00;
-    --texas-sky: #87CEEB;
-}
-
-body {
-    background-color: var(--texas-sand);
-    background-image: url('https://www.transparenttextures.com/patterns/leather.png');
-}
-
-.verse-container {
-    background: rgba(255, 255, 255, 0.95);
-    border: 2px solid var(--texas-brown);
-    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.2);
-}
-
-.verse-title {
-    color: var(--texas-cedar);
-    font-family: 'Georgia', serif;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-    border-bottom: 2px solid var(--texas-earth);
-    padding-bottom: 0.5rem;
-}
-
-.verse-line {
-    background-color: rgba(255, 253, 245, 0.9);
-    border: 1px solid var(--texas-brown) !important;
-    border-radius: 8px;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    position: relative;
-}
-
-.verse-line::before {
-    content: '🌵';
-    position: absolute;
-    left: -25px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.btn-primary {
-    background-color: var(--texas-cedar) !important;
-    border-color: var(--texas-earth) !important;
-}
-
-.btn-primary:hover {
-    background-color: var(--texas-earth) !important;
-    border-color: var(--texas-brown) !important;
-}
-
-.btn-outline-secondary {
-    color: var(--texas-cedar) !important;
-    border-color: var(--texas-cedar) !important;
-}
-
-.btn-outline-secondary:hover {
-    background-color: var(--texas-cedar) !important;
-    color: white !important;
-}
-
-.badge {
-    font-size: 0.85em;
-    padding: 0.4em 0.8em;
-}
-
-.badge-override {
-    background-color: var(--texas-earth) !important;
-    color: white;
-}
-
-.badge-normal {
-    background-color: var(--texas-cedar) !important;
-}
-
-.metadata {
-    color: var(--texas-cedar);
-    font-style: italic;
-}
-
-.line-grade {
-    color: var(--texas-brown);
-    font-weight: 500;
-}
-</style>
 {% endblock %}
 
 {% block content %}
 <div class="container py-4">
     <div class="row">
         <div class="col-lg-8 mx-auto">
-            <div class="mb-4 d-flex justify-content-between">
+            <div class="mb-4 d-flex justify-content-between align-items-center">
                 <a href="{% url 'versus:list' %}" class="btn btn-outline-secondary">
-                    <i class="bi bi-arrow-left-circle-fill"></i> Back to Trail Verses
+                    <i class="bi bi-arrow-left"></i> Back to Trail Verses
                 </a>
-                <a href="{% url 'versus:edit' verse.pk %}" class="btn btn-primary">
+                <a href="{% url 'versus:edit' verse.slug %}" class="btn btn-primary">
                     <i class="bi bi-pencil-square"></i> Edit Verse
                 </a>
             </div>
@@ -119,21 +32,28 @@ body {
                 
                 <div class="verse-content">
                     {% for line in verse.lines.all %}
-                    <div class="verse-line">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <div class="me-3 flex-grow-1">{{ line.content }}</div>
-                            <div class="d-flex align-items-center gap-2">
-                                <span class="line-grade">
-                                    <i class="bi bi-star-fill"></i> {{ line.grade }}
-                                </span>
-                                <span class="badge {% if line.is_syllable_override %}badge-override{% else %}badge-normal{% endif %}">
-                                    <i class="bi bi-music-note"></i> {{ line.syllable_count }} syllables
-                                    {% if line.is_syllable_override %}
-                                        <span class="ms-1" title="Syllable count manually set">
-                                            <i class="bi bi-pencil-fill"></i>
-                                        </span>
-                                    {% endif %}
-                                </span>
+                    <div class="verse-line mb-3">
+                        <div class="row align-items-center g-3">
+                            <div class="col-md-8 verse-line-content">
+                                {{ line.content }}
+                            </div>
+                            <div class="col-md-4">
+                                <div class="d-flex align-items-center justify-content-end gap-3">
+                                    <span class="line-grade" title="Line Grade">
+                                        <i class="bi bi-star-fill"></i> {{ line.grade }}
+                                    </span>
+                                    <span class="badge {% if line.is_syllable_override %}badge-override{% else %}badge-normal{% endif %}" title="Syllable Count">
+                                        <i class="bi bi-music-note"></i> 
+                                        {% if line.is_syllable_override %}
+                                            <span title="Calculated/Override">
+                                                {{ line.calculated_syllables }}/{{ line.syllable_count }}
+                                                <i class="bi bi-pencil-fill ms-1" title="Manual Override"></i>
+                                            </span>
+                                        {% else %}
+                                            {{ line.syllable_count }} syllables
+                                        {% endif %}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>

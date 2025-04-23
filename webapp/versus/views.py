@@ -5,6 +5,9 @@ from django.contrib import messages
 from .models import Verse, VerseLine
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import VerseForm
+from django.db import transaction
+from django.http import HttpResponseRedirect
+from icecream import ic
 
 # Create your views here.
 
@@ -15,141 +18,124 @@ class VerseListView(ListView):
 
 class VerseCreateView(LoginRequiredMixin, CreateView):
     model = Verse
-    template_name = 'versus/verse_form.html'
     form_class = VerseForm
+    template_name = 'versus/verse_form.html'
 
+    @transaction.atomic
     def form_valid(self, form):
-        form.instance.user = self.request.user
-        response = super().form_valid(form)
+        ic("Form submission received")
+        # Save the verse first
+        self.object = form.save()
+        ic("Verse saved:", self.object)
 
-        # Get all line data from the form
-        line_positions = []
+        # Get line data from POST
+        line_data = {}
+        max_position = 0
+        
+        # First collect all line data
+        ic("POST data:", self.request.POST)
         for key in self.request.POST:
             if key.startswith('line_'):
                 try:
                     position = int(key.split('_')[1])
-                    line_positions.append(position)
-                except (ValueError, IndexError):
+                    content = self.request.POST.get(key, '').strip()
+                    ic(f"Processing line {position}:", content)
+                    if content:  # Only add non-empty lines
+                        line_data[position] = {
+                            'content': content,
+                            'grade': self.request.POST.get(f'grade_{position}', 50)
+                        }
+                        max_position = max(max_position, position)
+                except (ValueError, IndexError) as e:
+                    ic(f"Error processing line {key}:", e)
                     continue
 
-        # Sort positions to maintain order
-        line_positions.sort()
+        ic("Collected line data:", line_data)
+        # Create lines with sequential positions
+        if line_data:
+            # Sort positions
+            sorted_positions = sorted(line_data.keys())
+            ic("Sorted positions:", sorted_positions)
+            
+            # Create lines with new sequential positions
+            for new_position, old_position in enumerate(sorted_positions, 1):
+                data = line_data[old_position]
+                ic(f"Creating line {new_position} from position {old_position}:", data)
+                VerseLine.objects.create(
+                    verse=self.object,
+                    content=data['content'],
+                    position=new_position,
+                    grade=data['grade']
+                )
 
-        # Create lines in order
-        for position in line_positions:
-            content = self.request.POST.get(f'line_{position}', '').strip()
-            grade = self.request.POST.get(f'grade_{position}', 50)
-            syllable_override = self.request.POST.get(f'syllables_{position}')
-
-            # Create the line even if content is empty
-            line = VerseLine.objects.create(
-                verse=form.instance,
-                position=position,
-                content=content,
-                grade=grade
+            # Update verse content
+            self.object.content = '\n'.join(
+                line_data[pos]['content'] 
+                for pos in sorted_positions
             )
+            ic("Updated verse content:", self.object.content)
+            self.object.save()
 
-            # Set syllable override if provided
-            if syllable_override:
-                try:
-                    line.syllable_count = int(syllable_override)
-                    line.is_syllable_override = True
-                    line.save()
-                except ValueError:
-                    pass
-
-        return response
+        return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
-        return reverse_lazy('versus:detail', kwargs={'pk': self.object.pk})
+        return reverse_lazy('versus:detail', kwargs={'slug': self.object.slug})
 
 class VerseDetailView(DetailView):
     model = Verse
     template_name = 'versus/verse_detail.html'
+    slug_url_kwarg = 'slug'
 
 class VerseEditView(LoginRequiredMixin, View):
     template_name = 'versus/verse_form.html'
     form_class = VerseForm
 
-    def get(self, request, pk):
-        verse = get_object_or_404(Verse, pk=pk)
-        # Create lines if they don't exist
-        if not verse.lines.exists():
-            lines = verse.content.split('\n')
-            for i, content in enumerate(lines, 1):
-                VerseLine.objects.create(
-                    verse=verse,
-                    content=content,  # Don't strip whitespace
-                    position=i,
-                    grade=50  # Default grade
-                )
+    def get(self, request, slug):
+        ic("Edit view GET request for slug:", slug)
+        verse = get_object_or_404(Verse, slug=slug)
         form = self.form_class(instance=verse)
-        return render(request, self.template_name, {'form': form})
+        
+        # Get existing lines in order
+        lines = verse.lines.all().order_by('position')
+        ic("Found lines:", lines)
+        
+        context = {
+            'form': form,
+            'verse': verse,
+            'existing_lines': [
+                {
+                    'content': line.content,
+                    'position': line.position,
+                    'grade': line.grade,
+                    'syllable_count': line.syllable_count,
+                    'is_syllable_override': line.is_syllable_override
+                }
+                for line in lines
+            ]
+        }
+        ic("Context for template:", context)
+        return render(request, self.template_name, context)
 
-    def post(self, request, pk):
+    @transaction.atomic
+    def post(self, request, slug):
         try:
-            verse = get_object_or_404(Verse, pk=pk)
+            ic("Starting POST request in VerseEditView")
+            verse = get_object_or_404(Verse, slug=slug)
             form = self.form_class(request.POST, instance=verse)
             
             if form.is_valid():
-                # Update title
+                ic("Form is valid, calling form.save()")
                 verse = form.save()
+                ic("Form save completed")
                 
-                # Get all line data from the form
-                line_data = {}
-                max_position = 0
-                
-                # First, collect all line positions
-                for key in request.POST:
-                    if key.startswith('line_'):
-                        position = int(key.split('_')[1])
-                        max_position = max(max_position, position)
-                        line_data[position] = {'content': request.POST[key]}
-                
-                # Then collect associated data for each line
-                for key, value in request.POST.items():
-                    if key.startswith('grade_'):
-                        position = int(key.split('_')[1])
-                        if position in line_data:
-                            line_data[position]['grade'] = int(value)
-                    elif key.startswith('syllables_'):
-                        position = int(key.split('_')[1])
-                        if position in line_data:
-                            line_data[position]['syllable_count'] = int(value)
-                            line_data[position]['is_syllable_override'] = True
-
-                if not line_data:
-                    messages.error(request, 'At least one line is required.')
-                    return render(request, self.template_name, {'form': form})
-
-                # Delete all existing lines to handle reordering
-                verse.lines.all().delete()
-
-                # Create lines in the new order, including empty ones
-                for position in range(1, max_position + 1):
-                    if position in line_data:
-                        line = VerseLine(
-                            verse=verse,
-                            position=position,
-                            content=line_data[position]['content'],
-                            grade=line_data[position].get('grade', 50)
-                        )
-                        if 'syllable_count' in line_data[position] and line_data[position].get('is_syllable_override', False):
-                            line.syllable_count = int(line_data[position]['syllable_count'])
-                            line.is_syllable_override = True
-                        line.save()
-
-                # Update verse content
-                all_lines = verse.lines.order_by('position')
-                verse.content = '\n'.join(line.content for line in all_lines)
-                verse.save()
-
                 messages.success(request, 'Verse updated successfully.')
-                return redirect('versus:detail', pk=verse.pk)
+                return redirect('versus:detail', slug=verse.slug)
             else:
+                ic("Form is invalid:", form.errors)
                 messages.error(request, 'Please correct the errors below.')
                 return render(request, self.template_name, {'form': form})
                 
         except Exception as e:
+            ic("Error in view:", str(e))
             messages.error(request, f'Error saving verse: {str(e)}')
             return render(request, self.template_name, {'form': form})

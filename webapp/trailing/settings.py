@@ -44,7 +44,7 @@ ROOT_URLCONF = 'trailing.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR / 'trailing' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -57,7 +57,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'trailverses.wsgi.application'
+WSGI_APPLICATION = 'trailing.wsgi.application'
 
 # Database
 DATABASES = {
@@ -93,6 +93,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = '/opt/static'
 
+STATICFILES_DIRS = [
+    BASE_DIR / "trailing" / "static",  # project-level static files
+]
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
@@ -103,5 +107,11 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
+# Authentication settings
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = 'login'
+
+# Crispy Forms
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"

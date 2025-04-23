@@ -1,0 +1,10 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+- always use URLs that start with the Verse SLUG
+- very few URLs will NOT begin with a verse.slug
+-- Trailing Versus List would not have a leading verse.slug in the URL
+
+- verse_slug should be pulled from the URL in the context_preprocessor as needed to make it always available

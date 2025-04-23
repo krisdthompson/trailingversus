@@ -10,7 +10,6 @@ else
     python manage.py makemigrations
     python manage.py migrate
 
-
     # Collect static files
     echo "Collecting static files..."
     python manage.py collectstatic --noinput
@@ -18,5 +17,4 @@ else
 # now run CMD from docker compose config
 echo "Running $@"
 exec "$@" 
-
 fi 

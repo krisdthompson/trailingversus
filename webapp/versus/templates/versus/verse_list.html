@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link href="{% static 'versus/css/versus.css' %}" rel="stylesheet">
+{% endblock %}
 
 {% block content %}
 <div class="container py-4">
@@ -15,7 +20,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ verse.title }}</h5>
                             <p class="card-text">{{ verse.content|truncatewords:30 }}</p>
-                            <a href="{% url 'versus:detail' verse.pk %}" class="btn btn-outline-primary">Read More</a>
+                            <a href="{% url 'versus:detail' verse.slug %}" class="btn btn-outline-primary">Read More</a>
                         </div>
                         <div class="card-footer text-muted">
                             Created: {{ verse.created_at|date:"M d, Y" }}

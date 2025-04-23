@@ -6,3 +6,5 @@ django-debug-toolbar
 
 django-crispy-forms
 crispy-bootstrap5
+icecream
+

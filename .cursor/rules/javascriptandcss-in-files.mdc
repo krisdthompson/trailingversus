@@ -1,0 +1,9 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+- javascript and should not be embedded in html templates
+- put javascript and css in the static/ folder for the django app
+- custom css goes into custom.css file
+- always use bootstrap5 before custom CSS if possible

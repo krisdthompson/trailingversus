@@ -1,18 +1,22 @@
-# Elegy
+# Trailing Versus
 
-A modern, web-based document editor with real-time autosave and rich text editing capabilities.
+A Django application for creating and sharing trail verses.
+
+## Naming Convention Note
+
+In this project, we use "Versus" as the plural form of "Verse" in our code and URLs, even though this is not technically correct English (where "verses" would be the proper plural). This was a deliberate stylistic choice to give the project a unique identity and maintain consistency with the trail/hiking theme.
 
 ## Description
 
-Elegy provides a clean, distraction-free writing environment with automatic saving, document management, and a rich text editor. Built with Django and modern web technologies.
+Trailing Versus is a Django application for creating and sharing verses inspired by hiking trails and outdoor experiences. Built with modern web technologies and a focus on user experience.
 
 ## Features
 
-- Rich text editing with TipTap
-- Real-time autosave
-- Document management
-- User authentication
-- Clean, modern UI with TailwindCSS
+- Create and edit trail verses
+- Syllable counting and manual override
+- Verse grading system
+- Clean, modern UI with Bootstrap 5
+- Texas-themed styling
 
 ## Getting Started
 
@@ -25,8 +29,8 @@ Elegy provides a clean, distraction-free writing environment with automatic savi
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/elegy.git
-cd elegy
+git clone https://github.com/yourusername/trailingversus.git
+cd trailingversus
 ```
 
 2. Start the application:
@@ -35,10 +39,6 @@ docker compose up --build
 ```
 
 3. Access the application at http://localhost:8000
-
-4. Log in with:
-   - Username: admin
-   - Password: admin
 
 ### Local Development
 
@@ -58,12 +58,7 @@ pip install -r requirements.txt
 python manage.py migrate
 ```
 
-4. Create a superuser:
-```bash
-python manage.py createsuperuser
-```
-
-5. Start the development server:
+4. Start the development server:
 ```bash
 python manage.py runserver
 ```
@@ -71,16 +66,15 @@ python manage.py runserver
 ## Project Structure
 
 ```
-elegy/
-├── docs/               # Documentation
-├── elegy/             # Main Django project
-│   ├── editor/        # Editor application
-│   ├── static/        # Static files
-│   └── templates/     # HTML templates
-├── data/              # SQLite database
+trailingversus/
+├── webapp/             # Main Django project
+│   ├── trailing/      # Project configuration
+│   │   ├── templates/ # Project-level templates
+│   │   └── settings/ # Django settings
+│   └── versus/       # Verses application
 ├── docker-compose.yml # Docker configuration
-├── Dockerfile         # Docker build file
-└── requirements.txt   # Python dependencies
+├── Dockerfile        # Docker build file
+└── requirements.txt  # Python dependencies
 ```
 
 ## Development

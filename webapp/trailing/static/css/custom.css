@@ -1,0 +1,255 @@
+/* Texas Theme Colors */
+:root {
+    --texas-brown: #8B4513;
+    --texas-sand: #DAA520;
+    --texas-cedar: #6B4423;
+    --texas-earth: #964B00;
+    --texas-sky: #87CEEB;
+}
+
+/* Utility Classes */
+.text-texas-brown { color: var(--texas-brown) !important; }
+.text-texas-sand { color: var(--texas-sand) !important; }
+.text-texas-earth { color: var(--texas-earth) !important; }
+.text-texas-sky { color: var(--texas-sky) !important; }
+
+.bg-texas-brown { background-color: var(--texas-brown) !important; }
+.bg-texas-sand { background-color: var(--texas-sand) !important; }
+.bg-texas-earth { background-color: var(--texas-earth) !important; }
+.bg-texas-sky { background-color: var(--texas-sky) !important; }
+
+/* Helper Classes */
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex-start {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.flex-end {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.gap-1 { gap: 0.25rem; }
+.gap-2 { gap: 0.5rem; }
+.gap-3 { gap: 1rem; }
+.gap-4 { gap: 1.5rem; }
+
+/* Base Styles */
+body {
+    background-color: var(--texas-sand);
+    background-image: url('https://www.transparenttextures.com/patterns/leather.png');
+}
+
+/* Navigation Styles */
+.navbar {
+    background-color: var(--texas-cedar) !important;
+    border-bottom: 2px solid var(--texas-earth);
+}
+
+.navbar-brand {
+    color: var(--texas-sand) !important;
+    font-family: 'Georgia', serif;
+    font-size: 1.5rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.nav-link {
+    color: var(--texas-sand) !important;
+    font-size: 1.1rem;
+}
+
+.nav-link:hover {
+    color: white !important;
+}
+
+.nav-link.active {
+    color: white !important;
+    font-weight: bold;
+}
+
+/* Utility Styles */
+.btn-close {
+    filter: opacity(0.8);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--texas-sand);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--texas-cedar);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--texas-brown);
+}
+
+/* Drag Handle Styles */
+.drag-handle {
+    cursor: move;
+    padding: 0.5rem;
+    margin-right: 0.5rem;
+    color: var(--texas-brown);
+}
+
+.drag-handle:hover {
+    color: var(--texas-earth);
+}
+
+/* Line Controls */
+.line-controls {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.line-controls .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+/* Verse Container Styles */
+.verse-container {
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid var(--texas-brown);
+    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.2);
+}
+
+.verse-title {
+    color: var(--texas-cedar);
+    font-family: 'Georgia', serif;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid var(--texas-earth);
+    padding-bottom: 0.5rem;
+}
+
+/* Verse Line Styles */
+.verse-line {
+    background-color: rgba(255, 253, 245, 0.9);
+    border: 1px solid var(--texas-brown) !important;
+    border-radius: 8px;
+    position: relative;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.verse-line::before {
+    content: '🌵';
+    position: absolute;
+    left: -25px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.verse-line-content {
+    flex-grow: 1;
+    margin-right: 1rem;
+}
+
+.verse-line-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    white-space: nowrap;
+}
+
+/* Badge and Input Styles */
+.badge {
+    background-color: var(--texas-cedar) !important;
+    padding: 0.4em 0.8em;
+    font-size: 1rem;
+}
+
+.syllable-input input {
+    width: 2ch !important;
+    padding: 0.25rem;
+    text-align: center;
+    -moz-appearance: textfield;
+}
+
+.syllable-input input::-webkit-outer-spin-button,
+.syllable-input input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Form Control Styles */
+.form-check-input:checked {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.form-control:focus {
+    border-color: var(--texas-brown);
+    box-shadow: 0 0 0 0.25rem rgba(139, 69, 19, 0.25);
+}
+
+/* Button Styles */
+.btn-primary {
+    background-color: var(--texas-cedar) !important;
+    border-color: var(--texas-earth) !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--texas-earth) !important;
+    border-color: var(--texas-brown) !important;
+}
+
+.btn-outline-primary {
+    color: var(--texas-cedar) !important;
+    border-color: var(--texas-cedar) !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--texas-cedar) !important;
+    color: white !important;
+}
+
+/* Form Styles */
+.verse-line-input {
+    font-size: 1rem;
+    line-height: 1.5;
+    min-height: 38px;
+    border-color: var(--texas-brown);
+}
+
+.verse-line-input:focus {
+    border-color: var(--texas-brown);
+    box-shadow: 0 0 0 0.2rem rgba(139, 69, 19, 0.25);
+}
+
+.grade-control {
+    background-color: rgba(139, 69, 19, 0.05);
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+}
+
+.grade-control label {
+    color: var(--texas-brown);
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.grade-control input {
+    border-color: var(--texas-brown);
+} 
