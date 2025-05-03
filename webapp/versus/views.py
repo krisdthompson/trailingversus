@@ -6,8 +6,10 @@ from .models import Verse, VerseLine
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import VerseForm
 from django.db import transaction
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from icecream import ic
+from django.views.decorators.http import require_http_methods
+import json
 
 # Create your views here.
 
@@ -139,3 +141,73 @@ class VerseEditView(LoginRequiredMixin, View):
             ic("Error in view:", str(e))
             messages.error(request, f'Error saving verse: {str(e)}')
             return render(request, self.template_name, {'form': form})
+
+@require_http_methods(["POST"])
+def save_verse_pattern(request, verse_id):
+    try:
+        ic("Saving verse pattern for verse_id:", verse_id)
+        data = json.loads(request.body)
+        verse = get_object_or_404(Verse, id=verse_id)
+        
+        if 'pattern' not in data:
+            ic("Pattern not found in request data")
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Pattern is required'
+            }, status=400)
+        
+        ic("Updating pattern:", data['pattern'])
+        verse.pattern = data['pattern']
+        verse.save()
+        
+        ic("Pattern saved successfully")
+        return JsonResponse({
+            'status': 'success',
+            'message': 'Pattern saved successfully'
+        })
+    except Verse.DoesNotExist:
+        ic("Verse not found:", verse_id)
+        return JsonResponse({
+            'status': 'error',
+            'message': 'Verse not found'
+        }, status=404)
+    except json.JSONDecodeError:
+        ic("Invalid JSON in request body")
+        return JsonResponse({
+            'status': 'error',
+            'message': 'Invalid JSON in request body'
+        }, status=400)
+    except Exception as e:
+        ic("Error saving pattern:", str(e))
+        return JsonResponse({
+            'status': 'error',
+            'message': f'Error saving pattern: {str(e)}'
+        }, status=400)
+
+@require_http_methods(["POST"])
+def save_verse_line(request, verse_id, line_id):
+    try:
+        data = json.loads(request.body)
+        verse = Verse.objects.get(id=verse_id)
+        
+        if line_id.startswith('new_'):
+            # Create new line
+            line = VerseLine.objects.create(
+                verse=verse,
+                content=data['content'],
+                grade=data['grade'],
+                syllable_count=data['syllable_count'],
+                position=data['position']
+            )
+        else:
+            # Update existing line
+            line = VerseLine.objects.get(id=line_id, verse=verse)
+            line.content = data['content']
+            line.grade = data['grade']
+            line.syllable_count = data['syllable_count']
+            line.position = data['position']
+            line.save()
+            
+        return JsonResponse({'status': 'success', 'line_id': line.id})
+    except Exception as e:
+        return JsonResponse({'status': 'error', 'message': str(e)}, status=400)

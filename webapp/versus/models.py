@@ -8,6 +8,7 @@ from .utils import count_syllables
 class Verse(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True, blank=True, db_index=True)
+    pattern = models.TextField(blank=True, help_text="Enter the poem's pattern or structure")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -5,7 +5,16 @@
     --texas-brown-light: #b25900;
     --texas-earth: #8B4513;
     --texas-cedar: #732E1F;
+    --texas-gray: #F5F5F5;
+    --texas-gray-light: #9CADB7;
+    --texas-success: #198754;
+    --texas-danger: #dc3545;
 }
+
+/* Theme color utilities */
+.bg-brown { background-color: var(--texas-brown) !important; }
+.text-brown { color: var(--texas-brown) !important; }
+.border-brown { border-color: var(--texas-brown) !important; }
 
 /* Verse line drag handle */
 .verse-line {
@@ -40,20 +49,12 @@
     transition: color 0.15s ease;
 }
 
-.drag-handle:hover {
-    color: var(--texas-brown-dark);
-}
-
+.drag-handle:hover,
 .verse-line:hover .drag-handle {
     color: var(--texas-brown-dark);
 }
 
-/* Texas brown theme */
-.bg-brown { background-color: var(--texas-brown); }
-.text-brown { color: var(--texas-brown); }
-.border-brown { border-color: var(--texas-brown); }
-
-/* Button overrides */
+/* Custom button styles */
 .btn-outline-brown {
     color: var(--texas-brown);
     border-color: var(--texas-brown);
@@ -65,35 +66,34 @@
     border-color: var(--texas-brown);
 }
 
-/* Custom variables */
-:root {
-    --texas-gray: #F5F5F5;
-    --texas-gray-light: #9CADB7;
+/* Verse pattern styles */
+.verse-pattern {
+    background-color: var(--bs-gray-100);
+    padding: 1rem;
+    border-radius: var(--bs-border-radius);
+    white-space: pre-wrap;
+    font-family: var(--bs-font-monospace);
+    margin-bottom: 0;
 }
 
-/* Bootstrap color utilities */
-.btn-primary:hover {
-    background-color: #7a3900;
-    border-color: #7a3900;
-}
-
-.btn-outline-primary {
-    color: var(--texas-brown);
-    border-color: var(--texas-brown);
-}
-
-.btn-outline-primary:hover {
-    background-color: var(--texas-brown);
-    color: white;
-}
-
-/* Verse Container Styles */
+/* Verse container and lines */
 .verse-container {
     background: rgba(255, 255, 255, 0.95);
     border: 2px solid var(--texas-brown);
     box-shadow: 0 4px 12px rgba(139, 69, 19, 0.2);
     max-width: 900px;
     margin: 0 auto;
+}
+
+.verse-lines-only {
+    text-align: center;
+    margin: 2rem auto;
+    max-width: 800px;
+}
+
+.verse-lines-only .verse-line {
+    margin: 0.5rem 0;
+    line-height: 1.5;
 }
 
 .verse-title {
@@ -103,6 +103,98 @@
     border-bottom: 2px solid var(--texas-earth);
     padding-bottom: 0.5rem;
     font-weight: bold;
+}
+
+/* Form elements */
+.syllable-controls {
+    background-color: rgba(150, 75, 0, 0.05);
+    padding: 0.5rem;
+    border-radius: var(--bs-border-radius);
+}
+
+.syllable-badge {
+    min-width: 2.5rem;
+    text-align: center;
+    font-size: 0.875rem;
+}
+
+/* Number input styling */
+.no-spinner {
+    -moz-appearance: textfield;
+}
+
+.no-spinner::-webkit-outer-spin-button,
+.no-spinner::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.grade-control input[type="number"],
+.syllable-input {
+    width: 4ch !important;
+    text-align: center;
+    padding: 0.25rem;
+}
+
+/* Form customization */
+.form-check-input:checked {
+    background-color: var(--texas-brown);
+    border-color: var(--texas-brown);
+}
+
+.form-control:focus {
+    border-color: var(--texas-brown);
+    box-shadow: 0 0 0 0.25rem rgba(139, 69, 19, 0.25);
+}
+
+/* Navbar customization */
+.navbar {
+    background-color: var(--texas-brown);
+    border-bottom: 3px solid var(--texas-brown-dark);
+}
+
+.navbar-brand {
+    color: white !important;
+    font-weight: 600;
+}
+
+.navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.85) !important;
+    font-weight: 500;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+    color: white !important;
+}
+
+.navbar-nav .nav-link.active {
+    color: var(--texas-brown-light) !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+    .verse-line {
+        margin-left: 1rem;
+    }
+    
+    .drag-handle {
+        left: -1rem;
+    }
+    
+    .line-controls {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .syllable-input,
+    .number-input-wrapper input[type="number"] {
+        width: 3ch !important;
+    }
+    
+    .syllable-controls {
+        margin: 0.5rem 0;
+    }
 }
 
 /* Line Controls */
@@ -124,33 +216,6 @@
 /* Override Controls */
 .override-check {
     margin: 0;
-}
-
-.syllable-input {
-    width: 4ch !important;
-    display: inline-block;
-}
-
-/* Grade Input */
-input[type="number"].form-control-sm {
-    width: 4ch;
-    text-align: center;
-    padding: 0.25rem;
-}
-
-/* Badge and Input Styles */
-.badge {
-    background-color: var(--texas-brown-light) !important;
-    padding: 0.4em 0.8em;
-    font-size: 1rem;
-}
-
-.badge-override {
-    background-color: var(--texas-earth) !important;
-}
-
-.badge-normal {
-    background-color: var(--texas-cedar) !important;
 }
 
 .syllable-input input {
@@ -200,51 +265,6 @@ input[type="number"].form-control-sm {
     font-weight: 500;
 }
 
-/* Navigation Styles */
-.navbar {
-    background-color: var(--texas-brown);
-    border-bottom: 3px solid var(--texas-brown-dark);
-}
-
-.navbar-brand {
-    color: white !important;
-    font-weight: 600;
-}
-
-.navbar-nav .nav-link {
-    color: rgba(255, 255, 255, 0.85) !important;
-    font-weight: 500;
-}
-
-.navbar-nav .nav-link:hover,
-.navbar-nav .nav-link:focus {
-    color: white !important;
-}
-
-.navbar-nav .nav-link.active {
-    color: var(--texas-brown-light) !important;
-}
-
-.navbar .dropdown-menu {
-    background-color: var(--texas-gray);
-    border: 1px solid var(--texas-brown);
-}
-
-.navbar .dropdown-item {
-    color: rgba(255, 255, 255, 0.85);
-}
-
-.navbar .dropdown-item:hover,
-.navbar .dropdown-item:focus {
-    background-color: var(--texas-brown);
-    color: white;
-}
-
-.navbar .dropdown-item.text-danger:hover {
-    background-color: #dc3545;
-    color: white;
-}
-
 /* Add Line Button */
 #add-line {
     color: var(--texas-brown);
@@ -261,26 +281,6 @@ input[type="number"].form-control-sm {
     color: white;
     font-weight: normal;
     padding: 0.5em 0.75em;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 767.98px) {
-    .verse-line {
-        margin-left: 1rem;
-    }
-    
-    .drag-handle {
-        left: -1rem;
-    }
-    
-    .line-controls {
-        flex-wrap: wrap;
-        gap: 0.5rem;
-    }
-    
-    .syllable-input {
-        width: 3ch !important;
-    }
 }
 
 /* Verse Line Grid Layout */
@@ -303,17 +303,6 @@ input[type="number"].form-control-sm {
     padding: 0.25rem 0.5rem;
 }
 
-/* Number Input Styling */
-.no-spinner {
-    -moz-appearance: textfield;
-}
-
-.no-spinner::-webkit-outer-spin-button,
-.no-spinner::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
 /* Grade Input specific styling */
 .grade-control input[type="number"] {
     padding: 0.25rem;
@@ -331,18 +320,79 @@ input[type="number"].form-control-sm {
     user-select: none;
 }
 
-/* Responsive Adjustments */
-@media (max-width: 767.98px) {
-    .verse-line {
-        margin-left: 1rem;
-    }
-    
-    .syllable-controls {
-        margin-top: 0.5rem;
-        margin-bottom: 0.5rem;
-    }
-    
-    .number-input-wrapper input[type="number"] {
-        width: 3ch !important;
-    }
+/* Save status indicators */
+.verse-line-input.saved {
+    border-color: var(--texas-success) !important;
+}
+
+.verse-line-input.unsaved {
+    border-color: var(--texas-danger) !important;
+}
+
+.save-status {
+    position: absolute;
+    right: -1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    transition: color 0.15s ease;
+}
+
+.save-status:hover {
+    color: var(--texas-brown-dark);
+}
+
+/* Pattern editor */
+.pattern-editor {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.pattern-editor .bi-pencil-square {
+    cursor: pointer;
+    color: var(--texas-brown);
+    transition: color 0.15s ease;
+}
+
+.pattern-editor .bi-pencil-square:hover {
+    color: var(--texas-brown-dark);
+}
+
+.pattern-editor textarea {
+    font-family: var(--bs-font-monospace);
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Cowboy theme icons */
+.bi-cowboy-hat {
+    position: relative;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.125em;
+}
+
+.bi-cowboy-hat::before {
+    content: "🤠";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.bi-lasso {
+    position: relative;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.125em;
+}
+
+.bi-lasso::before {
+    content: "🪢";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 } 

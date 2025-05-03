@@ -4,8 +4,102 @@
 
 {% block extra_css %}
 <link href="{% static 'versus/css/versus.css' %}" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
-// ... existing code ...
+<div class="container">
+    <div class="verse-container p-4">
+        <h1 class="verse-title mb-4">{{ verse.title }}</h1>
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs mb-4" id="verseViewTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="lines-tab" data-bs-toggle="tab" data-bs-target="#lines" type="button" role="tab" aria-controls="lines" aria-selected="true">
+                    <i class="bi bi-text-paragraph"></i> Verse Lines
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" type="button" role="tab" aria-controls="details" aria-selected="false">
+                    <i class="bi bi-info-circle"></i> Details
+                </button>
+            </li>
+        </ul>
+
+        <!-- Tab content -->
+        <div class="tab-content" id="verseViewContent">
+            <!-- Simple verse lines view -->
+            <div class="tab-pane fade show active" id="lines" role="tabpanel" aria-labelledby="lines-tab">
+                <div class="verse-lines-only">
+                    {% for line in verse.lines.all %}
+                    <div class="verse-line">{{ line.content }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Detailed view -->
+            <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
+                <div class="verse-details">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h5 class="text-brown">Pattern</h5>
+                            <pre class="verse-pattern">{{ verse.pattern }}</pre>
+                        </div>
+                        <div class="col-md-6">
+                            <h5 class="text-brown">Metadata</h5>
+                            <ul class="list-unstyled">
+                                <li><strong>Created:</strong> {{ verse.created_at|date:"F j, Y" }}</li>
+                                <li><strong>Author:</strong> {{ verse.author }}</li>
+                                {% if verse.modified_at %}
+                                <li><strong>Last Modified:</strong> {{ verse.modified_at|date:"F j, Y" }}</li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h5 class="text-brown mb-3">Verse Lines with Details</h5>
+                    <div class="verse-lines-detailed">
+                        {% for line in verse.lines.all %}
+                        <div class="verse-line-detail mb-3 p-3 border rounded bg-light">
+                            <div class="row align-items-center">
+                                <div class="col-md-6">{{ line.content }}</div>
+                                <div class="col-md-3">
+                                    <span class="badge bg-texas-brown">{{ line.syllable_count }} syllables</span>
+                                </div>
+                                <div class="col-md-3 text-end">
+                                    <span class="badge bg-secondary">Grade: {{ line.grade }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Bootstrap tabs
+    const triggerTabList = [].slice.call(document.querySelectorAll('#verseViewTabs button'));
+    triggerTabList.forEach(function(triggerEl) {
+        const tabTrigger = new bootstrap.Tab(triggerEl);
+        
+        triggerEl.addEventListener('click', function(event) {
+            event.preventDefault();
+            tabTrigger.show();
+        });
+    });
+
+    // Set Lines tab as default active tab
+    const linesTab = document.querySelector('#lines-tab');
+    if (linesTab) {
+        const tab = new bootstrap.Tab(linesTab);
+        tab.show();
+    }
+});
+</script>
 {% endblock %} 

@@ -141,6 +141,9 @@ class VerseForm(forms.ModelForm):
             # Get the form data
             ic("Processing form data:", self.data)
             
+            # Delete all existing lines first to avoid position conflicts
+            verse.lines.all().delete()
+            
             # Track new position for each line
             current_position = 1
             
@@ -150,13 +153,14 @@ class VerseForm(forms.ModelForm):
             
             for key in content_fields:
                 ic("Processing content field:", key)
-                # Get the line identifier (either a PK or new_X)
-                line_id = key.split('-')[0].replace('line_', '')
-                content = self.data[f'line_{line_id}-content'].strip()
+                content = self.data[key].strip()
                 
                 if not content:  # Skip empty lines
-                    ic(f"Skipping empty line {line_id}")
+                    ic(f"Skipping empty line")
                     continue
+                
+                # Get the line identifier (either a PK or new_X)
+                line_id = key.split('-')[0].replace('line_', '')
                 
                 # Get the form values
                 try:
@@ -174,44 +178,20 @@ class VerseForm(forms.ModelForm):
                         line_data['syllable_count'] = syllable_count
                         line_data['is_syllable_override'] = True
                     
-                    ic(f"Line {line_id} data:", line_data)
+                    ic(f"Creating line with data:", line_data)
                     
-                    # Create or update the line
-                    if line_id.isdigit():
-                        try:
-                            line = verse.lines.get(pk=int(line_id))
-                            ic(f"Found existing line {line_id}")
-                            for field, value in line_data.items():
-                                setattr(line, field, value)
-                            if is_override:
-                                line._skip_syllable_count = True
-                            line.save()
-                            ic(f"Updated line {line_id}:", line)
-                        except VerseLine.DoesNotExist:
-                            ic(f"Line {line_id} not found, creating new")
-                            line = VerseLine(verse=verse, **line_data)
-                            if is_override:
-                                line._skip_syllable_count = True
-                            line.save()
-                            ic(f"Created new line for {line_id}:", line)
-                    else:  # This is a new line
-                        ic(f"Creating new line for {line_id}")
-                        line = VerseLine(verse=verse, **line_data)
-                        if is_override:
-                            line._skip_syllable_count = True
-                        line.save()
-                        ic(f"Created new line:", line)
+                    # Create new line
+                    line = VerseLine(verse=verse, **line_data)
+                    if is_override:
+                        line._skip_syllable_count = True
+                    line.save()
+                    ic(f"Created new line:", line)
                     
+                    # Increment position counter
                     current_position += 1
+                    
                 except Exception as e:
-                    ic(f"Error processing line {line_id}:", str(e))
+                    ic(f"Error processing line:", str(e))
                     raise
-            
-            # Update verse content
-            lines = verse.lines.all().order_by('position')
-            ic("All lines after processing:", list(lines))
-            verse.content = '\n'.join(line.content for line in lines)
-            verse.save()
-            ic("Final verse content:", verse.content)
             
         return verse 
