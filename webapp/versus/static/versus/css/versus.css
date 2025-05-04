@@ -1,12 +1,11 @@
 /* Texas theme colors */
 :root {
-    --texas-brown: #964B00;
-    --texas-brown-dark: #7a3900;
-    --texas-brown-light: #b25900;
-    --texas-earth: #8B4513;
-    --texas-cedar: #732E1F;
+    --texas-brown: #8B4513;
+    --texas-sand: #DAA520;
+    --texas-cedar: #6B4423;
+    --texas-earth: #964B00;
+    --texas-sky: #87CEEB;
     --texas-gray: #F5F5F5;
-    --texas-gray-light: #9CADB7;
     --texas-success: #198754;
     --texas-danger: #dc3545;
 }
@@ -395,4 +394,233 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.verse-content.clean-view {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.verse-content.clean-view .verse-line {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.verse-content.clean-view .verse-line:last-child {
+    border-bottom: none;
+}
+
+/* Existing styles */
+.verse-container {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.verse-title {
+    color: #333;
+    font-weight: 600;
+}
+
+.verse-line-content {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.line-grade {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.badge-normal {
+    background-color: #6c757d;
+    color: white;
+}
+
+.badge-override {
+    background-color: #dc3545;
+    color: white;
+}
+
+.metadata {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Tab styles */
+.nav-tabs {
+    border-bottom: 2px solid var(--texas-brown);
+}
+
+.nav-tabs .nav-link {
+    color: var(--texas-brown);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    font-size: 1.1rem;
+    transition: all 0.2s ease;
+}
+
+.nav-tabs .nav-link.active {
+    color: white;
+    background-color: var(--texas-brown);
+    border: none;
+    border-radius: 0;
+}
+
+.nav-tabs .nav-link:hover:not(.active) {
+    color: var(--texas-earth);
+    background-color: var(--texas-gray);
+    border: none;
+}
+
+/* Clean view styles */
+.verse-content.clean-view {
+    font-family: 'Georgia', serif;
+    font-size: 1.25rem;
+    line-height: 1.8;
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.verse-content.clean-view .verse-line {
+    all: initial !important;
+    display: block !important;
+    font-family: 'Georgia', serif !important;
+    font-size: 1.25rem !important;
+    line-height: 1.8 !important;
+    color: var(--texas-brown) !important;
+    text-align: center !important;
+    margin: 0.5rem 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    background: none !important;
+    position: static !important;
+    border-radius: 0 !important;
+}
+
+.verse-content.clean-view .verse-line::before {
+    content: none !important;
+    display: none !important;
+}
+
+/* Details view styles */
+.verse-content {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.verse-line-content {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.line-grade {
+    color: var(--texas-brown);
+    font-size: 0.9rem;
+}
+
+.badge-normal {
+    background-color: var(--texas-brown);
+    color: white;
+}
+
+.badge-override {
+    background-color: var(--texas-danger);
+    color: white;
+}
+
+/* Container and title styles */
+.verse-container {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.verse-title {
+    color: var(--texas-brown);
+    font-weight: 600;
+    text-align: center;
+}
+
+.metadata {
+    color: var(--texas-brown);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+    .nav-tabs .nav-link {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+    }
+    
+    .verse-content.clean-view {
+        font-size: 1.1rem;
+        padding: 1rem 0;
+    }
+}
+
+/* Clean line styles with maximum specificity */
+.verse-line.clean-line {
+    all: initial !important;
+    display: block !important;
+    font-family: 'Georgia', serif !important;
+    font-size: 1.25rem !important;
+    line-height: 1.8 !important;
+    color: var(--texas-brown) !important;
+    text-align: center !important;
+    margin: 0.5rem 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    background: none !important;
+    position: static !important;
+    border-radius: 0 !important;
+}
+
+/* Remove pseudo-elements from clean lines */
+.verse-line.clean-line::before,
+.verse-line.clean-line::after {
+    content: none !important;
+    display: none !important;
+}
+
+/* Details view - using Bootstrap's grid and spacing utilities */
+.verse-line-content {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.line-grade {
+    color: var(--texas-brown);
+    font-size: 0.9rem;
+}
+
+/* Badges - using Bootstrap's badge component with custom colors */
+.badge-normal {
+    background-color: var(--texas-brown);
+    color: white;
+}
+
+.badge-override {
+    background-color: var(--texas-danger);
+    color: white;
+}
+
+/* Container - using Bootstrap's card utilities */
+.verse-container {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+    .nav-tabs .nav-link {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+    }
+    
+    .verse-content.clean-view {
+        font-size: 1.1rem;
+        padding: 1rem 0;
+    }
 } 

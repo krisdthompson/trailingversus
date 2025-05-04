@@ -3,6 +3,7 @@
 {% load crispy_forms_tags %}
 
 {% block extra_css %}
+<link href="{% static 'versus/css/versus.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -19,9 +20,9 @@
             </div>
             
             <article class="verse-container p-4 rounded">
-                <h1 class="verse-title display-4 mb-3">{{ verse.title }}</h1>
+                <h1 class="text-brown text-center fw-bold mb-3">{{ verse.title }}</h1>
                 
-                <div class="metadata mb-4">
+                <div class="text-brown text-center small mb-4">
                     <i class="bi bi-calendar3"></i> Created: {{ verse.created_at|date:"F d, Y" }}
                     {% if verse.updated_at != verse.created_at %}
                         <span class="ms-3">
@@ -29,42 +30,90 @@
                         </span>
                     {% endif %}
                 </div>
-                
-                <div class="verse-content">
-                    {% for line in verse.lines.all %}
-                    <div class="verse-line mb-3">
-                        <div class="row align-items-center g-3">
-                            <div class="col-md-8 verse-line-content">
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs mb-4" id="verseViewTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="versus-tab" data-bs-toggle="tab" data-bs-target="#versus" type="button" role="tab" aria-controls="versus" aria-selected="true">
+                            Versus
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" type="button" role="tab" aria-controls="details" aria-selected="false">
+                            Details
+                        </button>
+                    </li>
+                </ul>
+
+                <!-- Tab content -->
+                <div class="tab-content" id="verseViewContent">
+                    <!-- Versus view -->
+                    <div class="tab-pane fade show active" id="versus" role="tabpanel" aria-labelledby="versus-tab">
+                        <div class="verse-content clean-view">
+                            {% for line in verse.lines.all %}
+                            <div class="verse-line clean-line">
                                 {{ line.content }}
                             </div>
-                            <div class="col-md-4">
-                                <div class="d-flex align-items-center justify-content-end gap-3">
-                                    <span class="line-grade" title="Line Grade">
-                                        <i class="bi bi-star-fill"></i> {{ line.grade }}
-                                    </span>
-                                    <span class="badge {% if line.is_syllable_override %}badge-override{% else %}badge-normal{% endif %}" title="Syllable Count">
-                                        <i class="bi bi-music-note"></i> 
-                                        {% if line.is_syllable_override %}
-                                            <span title="Calculated/Override">
-                                                {{ line.calculated_syllables }}/{{ line.syllable_count }}
-                                                <i class="bi bi-pencil-fill ms-1" title="Manual Override"></i>
-                                            </span>
-                                        {% else %}
-                                            {{ line.syllable_count }} syllables
-                                        {% endif %}
-                                    </span>
-                                </div>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
-                    {% empty %}
-                    <div class="alert alert-warning">
-                        <i class="bi bi-exclamation-triangle"></i> No verses found in this trail song.
+
+                    <!-- Details view -->
+                    <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
+                        <div class="verse-content">
+                            {% for line in verse.lines.all %}
+                            <div class="verse-line mb-3">
+                                <div class="row align-items-center g-3">
+                                    <div class="col-md-8 verse-line-content">
+                                        {{ line.content }}
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="d-flex align-items-center justify-content-end gap-3">
+                                            <span class="line-grade" title="Line Grade">
+                                                <i class="bi bi-star-fill"></i> {{ line.grade }}
+                                            </span>
+                                            <span class="badge {% if line.is_syllable_override %}badge-override{% else %}badge-normal{% endif %}" title="Syllable Count">
+                                                <i class="bi bi-music-note"></i> 
+                                                {% if line.is_syllable_override %}
+                                                    <span title="Calculated/Override">
+                                                        {{ line.calculated_syllables }}/{{ line.syllable_count }}
+                                                        <i class="bi bi-pencil-fill ms-1" title="Manual Override"></i>
+                                                    </span>
+                                                {% else %}
+                                                    {{ line.syllable_count }} syllables
+                                                {% endif %}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% empty %}
+                            <div class="alert alert-warning">
+                                <i class="bi bi-exclamation-triangle"></i> No verses found in this trail song.
+                            </div>
+                            {% endfor %}
+                        </div>
                     </div>
-                    {% endfor %}
                 </div>
             </article>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Bootstrap tabs
+    const triggerTabList = [].slice.call(document.querySelectorAll('#verseViewTabs button'));
+    triggerTabList.forEach(function(triggerEl) {
+        const tabTrigger = new bootstrap.Tab(triggerEl);
+        
+        triggerEl.addEventListener('click', function(event) {
+            event.preventDefault();
+            tabTrigger.show();
+        });
+    });
+});
+</script>
 {% endblock %} 
