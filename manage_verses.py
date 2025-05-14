@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 def ensure_dump_directory():
     """Ensure the Dump directory exists."""
-    dump_dir = "Dump"
+    dump_dir = "dump"
     if not os.path.exists(dump_dir):
         os.makedirs(dump_dir)
     return dump_dir
