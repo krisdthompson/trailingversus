@@ -1,0 +1,231 @@
+{
+  "verse": {
+    "model": "versus.verse",
+    "pk": 2,
+    "fields": {
+      "title": "Tichborne's Elegy",
+      "slug": "tichbornes-elegy",
+      "pattern": "ab ab (cc same sound each sestet)",
+      "created_at": "2025-04-25T16:45:03.883Z",
+      "updated_at": "2025-04-25T17:11:29.578Z"
+    }
+  },
+  "lines": [
+    {
+      "model": "versus.verseline",
+      "pk": 44,
+      "fields": {
+        "verse": 2,
+        "content": "My prime of youth is but a frost of cares;",
+        "position": 1,
+        "grade": 50,
+        "syllable_count": 10,
+        "is_syllable_override": true
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 45,
+      "fields": {
+        "verse": 2,
+        "content": "My feast of joy is but a dish of pain,",
+        "position": 2,
+        "grade": 50,
+        "syllable_count": 10,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 46,
+      "fields": {
+        "verse": 2,
+        "content": "My crop of corn is but a field of tares,",
+        "position": 3,
+        "grade": 50,
+        "syllable_count": 11,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 47,
+      "fields": {
+        "verse": 2,
+        "content": "And all my good is but vain hope of gain:",
+        "position": 4,
+        "grade": 50,
+        "syllable_count": 10,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 48,
+      "fields": {
+        "verse": 2,
+        "content": "The day is past, and yet I saw no sun,",
+        "position": 5,
+        "grade": 50,
+        "syllable_count": 10,
+        "is_syllable_override": true
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 49,
+      "fields": {
+        "verse": 2,
+        "content": "And now I live, and now my life is done.",
+        "position": 6,
+        "grade": 50,
+        "syllable_count": 12,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 50,
+      "fields": {
+        "verse": 2,
+        "content": "My tale was heard, and yet it was not told,",
+        "position": 7,
+        "grade": 50,
+        "syllable_count": 10,
+        "is_syllable_override": true
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 51,
+      "fields": {
+        "verse": 2,
+        "content": "My fruit is fallen, and yet my leaves are green,",
+        "position": 8,
+        "grade": 50,
+        "syllable_count": 12,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 52,
+      "fields": {
+        "verse": 2,
+        "content": "My youth is spent, and yet I am not old,",
+        "position": 9,
+        "grade": 50,
+        "syllable_count": 10,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 53,
+      "fields": {
+        "verse": 2,
+        "content": "I saw the world, and yet I was not seen:",
+        "position": 10,
+        "grade": 50,
+        "syllable_count": 10,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 54,
+      "fields": {
+        "verse": 2,
+        "content": "My thread is cut, and yet it is not spun,",
+        "position": 11,
+        "grade": 50,
+        "syllable_count": 10,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 55,
+      "fields": {
+        "verse": 2,
+        "content": "And now I live, and now my life is done.",
+        "position": 12,
+        "grade": 50,
+        "syllable_count": 12,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 56,
+      "fields": {
+        "verse": 2,
+        "content": "I sought my death, and found it in my womb,",
+        "position": 13,
+        "grade": 50,
+        "syllable_count": 10,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 57,
+      "fields": {
+        "verse": 2,
+        "content": "I looked for life, and saw it was a shade,",
+        "position": 14,
+        "grade": 50,
+        "syllable_count": 13,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 58,
+      "fields": {
+        "verse": 2,
+        "content": "I trod the earth, and knew it was my tomb,",
+        "position": 15,
+        "grade": 50,
+        "syllable_count": 10,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 59,
+      "fields": {
+        "verse": 2,
+        "content": "And now I die, and now I was but made;",
+        "position": 16,
+        "grade": 50,
+        "syllable_count": 11,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 60,
+      "fields": {
+        "verse": 2,
+        "content": "The glass is full, and now the glass is run,",
+        "position": 17,
+        "grade": 50,
+        "syllable_count": 10,
+        "is_syllable_override": true
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 61,
+      "fields": {
+        "verse": 2,
+        "content": "And now I live, and now my life is done.",
+        "position": 18,
+        "grade": 50,
+        "syllable_count": 12,
+        "is_syllable_override": false
+      }
+    }
+  ]
+}

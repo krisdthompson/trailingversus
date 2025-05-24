@@ -4,6 +4,7 @@ import sys
 import subprocess
 import logging
 from datetime import datetime
+import json
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(message)s')
@@ -17,38 +18,61 @@ def ensure_dump_directory():
     return dump_dir
 
 def dump_verses():
-    """Dump each verse into a separate file in the Dump directory."""
+    """Dump each verse and its lines into separate files in the Dump directory."""
     dump_dir = ensure_dump_directory()
     
     # Get list of verses
-    result = subprocess.run(
+    verse_result = subprocess.run(
         ["docker-compose", "exec", "-T", "trailing", "./manage.py", "dumpdata", "versus.verse", "--indent", "2"],
         capture_output=True,
         text=True
     )
     
-    if result.returncode != 0:
-        logger.error(f"Error getting verse data: {result.stderr}")
+    if verse_result.returncode != 0:
+        logger.error(f"Error getting verse data: {verse_result.stderr}")
         sys.exit(1)
     
-    import json
-    verses = json.loads(result.stdout)
+    # Get list of verse lines
+    line_result = subprocess.run(
+        ["docker-compose", "exec", "-T", "trailing", "./manage.py", "dumpdata", "versus.verseline", "--indent", "2"],
+        capture_output=True,
+        text=True
+    )
     
-    # Dump each verse to a separate file
+    if line_result.returncode != 0:
+        logger.error(f"Error getting verse line data: {line_result.stderr}")
+        sys.exit(1)
+    
+    verses = json.loads(verse_result.stdout)
+    lines = json.loads(line_result.stdout)
+    
+    # Group lines by verse
+    verse_lines = {}
+    for line in lines:
+        verse_id = line['fields']['verse']
+        if verse_id not in verse_lines:
+            verse_lines[verse_id] = []
+        verse_lines[verse_id].append(line)
+    
+    # Dump each verse with its lines
     for verse in verses:
+        verse_id = verse['pk']
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        filename = f"{dump_dir}/verse_{verse['pk']}_{timestamp}.json"
+        filename = f"{dump_dir}/verse_{verse_id}_{timestamp}.json"
         
-        # Create a single-item list for compatibility with loaddata
-        verse_data = [verse]
+        # Create the combined data structure
+        verse_data = {
+            'verse': verse,
+            'lines': verse_lines.get(verse_id, [])
+        }
         
         with open(filename, 'w') as f:
             json.dump(verse_data, f, indent=2)
         
-        logger.info(f"Dumped verse {verse['pk']} to {filename}")
+        logger.info(f"Dumped verse {verse_id} with {len(verse_lines.get(verse_id, []))} lines to {filename}")
 
 def load_verse(filename):
-    """Load a verse from a dump file."""
+    """Load a verse and its lines from a dump file."""
     if not filename.endswith('.json'):
         filename += '.json'
     
@@ -59,17 +83,54 @@ def load_verse(filename):
         logger.error(f"Error: File {filepath} not found")
         sys.exit(1)
     
-    result = subprocess.run(
-        ["docker-compose", "exec", "-T", "trailing", "./manage.py", "loaddata", filepath],
-        capture_output=True,
-        text=True
-    )
+    # Read the combined data
+    with open(filepath, 'r') as f:
+        data = json.load(f)
     
-    if result.returncode != 0:
-        logger.error(f"Error loading verse data: {result.stderr}")
-        sys.exit(1)
+    # Create temporary files for verse and lines
+    temp_verse_file = os.path.join(dump_dir, f"temp_verse_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json")
+    temp_lines_file = os.path.join(dump_dir, f"temp_lines_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json")
     
-    logger.info(f"Successfully loaded verse data from {filepath}")
+    try:
+        # Write verse data to temp file
+        with open(temp_verse_file, 'w') as f:
+            json.dump([data['verse']], f, indent=2)
+        
+        # Load verse first
+        verse_result = subprocess.run(
+            ["docker-compose", "exec", "-T", "trailing", "./manage.py", "loaddata", temp_verse_file],
+            capture_output=True,
+            text=True
+        )
+        
+        if verse_result.returncode != 0:
+            logger.error(f"Error loading verse data: {verse_result.stderr}")
+            sys.exit(1)
+        
+        if data['lines']:
+            # Write lines data to temp file
+            with open(temp_lines_file, 'w') as f:
+                json.dump(data['lines'], f, indent=2)
+            
+            # Load lines
+            lines_result = subprocess.run(
+                ["docker-compose", "exec", "-T", "trailing", "./manage.py", "loaddata", temp_lines_file],
+                capture_output=True,
+                text=True
+            )
+            
+            if lines_result.returncode != 0:
+                logger.error(f"Error loading verse line data: {lines_result.stderr}")
+                sys.exit(1)
+        
+        logger.info(f"Successfully loaded verse and {len(data['lines'])} lines from {filepath}")
+    
+    finally:
+        # Clean up temporary files
+        if os.path.exists(temp_verse_file):
+            os.remove(temp_verse_file)
+        if os.path.exists(temp_lines_file):
+            os.remove(temp_lines_file)
 
 def main():
     if len(sys.argv) < 2:

@@ -1,0 +1,231 @@
+{
+  "verse": {
+    "model": "versus.verse",
+    "pk": 3,
+    "fields": {
+      "title": "Lars's Legacy",
+      "slug": "larss-legacy",
+      "pattern": "ab ab cc - sestets (6 lines) x 3 stanzas\r\nclose to 10 syllables per line",
+      "created_at": "2025-04-26T12:32:21.666Z",
+      "updated_at": "2025-05-04T13:44:33.433Z"
+    }
+  },
+  "lines": [
+    {
+      "model": "versus.verseline",
+      "pk": 241,
+      "fields": {
+        "verse": 3,
+        "content": "He came over from England as a small boy,",
+        "position": 1,
+        "grade": 50,
+        "syllable_count": 11,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 242,
+      "fields": {
+        "verse": 3,
+        "content": "so lucky their ship, to make the long trip.",
+        "position": 2,
+        "grade": 50,
+        "syllable_count": 10,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 243,
+      "fields": {
+        "verse": 3,
+        "content": "They settled in Canada, in quest of more joy,",
+        "position": 3,
+        "grade": 50,
+        "syllable_count": 12,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 244,
+      "fields": {
+        "verse": 3,
+        "content": "his room in Toronto, could be very nip.",
+        "position": 4,
+        "grade": 50,
+        "syllable_count": 11,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 245,
+      "fields": {
+        "verse": 3,
+        "content": "He once was among us, but now lives in the stars.",
+        "position": 5,
+        "grade": 50,
+        "syllable_count": 13,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 246,
+      "fields": {
+        "verse": 3,
+        "content": "He was our father, his name was Lars.",
+        "position": 6,
+        "grade": 50,
+        "syllable_count": 9,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 247,
+      "fields": {
+        "verse": 3,
+        "content": "Each summer took him to true outdoor camp,",
+        "position": 7,
+        "grade": 50,
+        "syllable_count": 10,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 248,
+      "fields": {
+        "verse": 3,
+        "content": "where he thrived in good nature ,and sharing in lore.",
+        "position": 8,
+        "grade": 50,
+        "syllable_count": 14,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 249,
+      "fields": {
+        "verse": 3,
+        "content": "Enlighten the mind, can be done with a lamp,",
+        "position": 9,
+        "grade": 50,
+        "syllable_count": 11,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 250,
+      "fields": {
+        "verse": 3,
+        "content": "then sharing with others, down to their core.",
+        "position": 10,
+        "grade": 50,
+        "syllable_count": 11,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 251,
+      "fields": {
+        "verse": 3,
+        "content": "His students loved him, and his love of farce.",
+        "position": 11,
+        "grade": 50,
+        "syllable_count": 12,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 252,
+      "fields": {
+        "verse": 3,
+        "content": "He was our father, his name was Lars.",
+        "position": 12,
+        "grade": 50,
+        "syllable_count": 9,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 253,
+      "fields": {
+        "verse": 3,
+        "content": "Six children came babbling, with minds of their own.",
+        "position": 13,
+        "grade": 50,
+        "syllable_count": 11,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 254,
+      "fields": {
+        "verse": 3,
+        "content": "They rebuilt log cabins, our fathers belief,",
+        "position": 14,
+        "grade": 50,
+        "syllable_count": 11,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 255,
+      "fields": {
+        "verse": 3,
+        "content": "that if we could finish, the kids would be grown.",
+        "position": 15,
+        "grade": 50,
+        "syllable_count": 11,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 256,
+      "fields": {
+        "verse": 3,
+        "content": "The memories created now comfort our grief,",
+        "position": 16,
+        "grade": 50,
+        "syllable_count": 11,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 257,
+      "fields": {
+        "verse": 3,
+        "content": "like when he made hot dogs that turned into chars.",
+        "position": 17,
+        "grade": 50,
+        "syllable_count": 12,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 258,
+      "fields": {
+        "verse": 3,
+        "content": "He was my father, his name was Lars.",
+        "position": 18,
+        "grade": 50,
+        "syllable_count": 9,
+        "is_syllable_override": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,531 @@
+{
+  "verse": {
+    "model": "versus.verse",
+    "pk": 1,
+    "fields": {
+      "title": "A Letter from DRUGS",
+      "slug": "a-letter-from-drugs",
+      "pattern": "",
+      "created_at": "2025-04-24T16:07:09.707Z",
+      "updated_at": "2025-04-24T17:44:33.397Z"
+    }
+  },
+  "lines": [
+    {
+      "model": "versus.verseline",
+      "pk": 1,
+      "fields": {
+        "verse": 1,
+        "content": "I destroy homes, tear families... apart - take your children, and that's just the start.",
+        "position": 1,
+        "grade": 50,
+        "syllable_count": 21,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 2,
+      "fields": {
+        "verse": 1,
+        "content": "I'm more costly than diamonds, more costly than gold - the sorrow I bring in is a sight to behold",
+        "position": 2,
+        "grade": 50,
+        "syllable_count": 25,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 3,
+      "fields": {
+        "verse": 1,
+        "content": "And if you need me, remember I'm easily found.",
+        "position": 3,
+        "grade": 50,
+        "syllable_count": 13,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 4,
+      "fields": {
+        "verse": 1,
+        "content": "I live around you, in schools and town.",
+        "position": 4,
+        "grade": 50,
+        "syllable_count": 9,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 5,
+      "fields": {
+        "verse": 1,
+        "content": "I live with the rich, I live with the poor, I live down the street, and maybe next door.",
+        "position": 5,
+        "grade": 50,
+        "syllable_count": 19,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 6,
+      "fields": {
+        "verse": 1,
+        "content": "My power is awesome - try me you'll see.",
+        "position": 6,
+        "grade": 50,
+        "syllable_count": 12,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 7,
+      "fields": {
+        "verse": 1,
+        "content": "But if you do, you may never break free.",
+        "position": 7,
+        "grade": 50,
+        "syllable_count": 10,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 8,
+      "fields": {
+        "verse": 1,
+        "content": "Just try me once, and I might let you go, but try me twice, and I'll own your soul.",
+        "position": 8,
+        "grade": 50,
+        "syllable_count": 21,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 9,
+      "fields": {
+        "verse": 1,
+        "content": "When I possess you, you'll steal and you'll lie.",
+        "position": 9,
+        "grade": 50,
+        "syllable_count": 10,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 10,
+      "fields": {
+        "verse": 1,
+        "content": "You'll do what you have to just to get high.",
+        "position": 10,
+        "grade": 50,
+        "syllable_count": 10,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 11,
+      "fields": {
+        "verse": 1,
+        "content": "The crimes you'll commit, for your narcotic chsarms, will be worth the pleasure you'll feel in your arms.",
+        "position": 11,
+        "grade": 50,
+        "syllable_count": 23,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 12,
+      "fields": {
+        "verse": 1,
+        "content": "You'll lie to your mother, you'll steal from your dad.",
+        "position": 12,
+        "grade": 50,
+        "syllable_count": 11,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 13,
+      "fields": {
+        "verse": 1,
+        "content": "When you see their tears, you should feel sad.",
+        "position": 13,
+        "grade": 50,
+        "syllable_count": 9,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 14,
+      "fields": {
+        "verse": 1,
+        "content": "But you'll forget your morals and how you were raised.",
+        "position": 14,
+        "grade": 50,
+        "syllable_count": 13,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 15,
+      "fields": {
+        "verse": 1,
+        "content": "I'll be your conscience, I'll teach you my ways.",
+        "position": 15,
+        "grade": 50,
+        "syllable_count": 11,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 16,
+      "fields": {
+        "verse": 1,
+        "content": "I take kids from parents, and parents from kids. I turn people from god and separate from friends.",
+        "position": 16,
+        "grade": 50,
+        "syllable_count": 23,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 17,
+      "fields": {
+        "verse": 1,
+        "content": "I'll take everything from you, your looks and your pride, I'll be with you always, right by your side.",
+        "position": 17,
+        "grade": 50,
+        "syllable_count": 25,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 18,
+      "fields": {
+        "verse": 1,
+        "content": "You'll give up everything, your family, your home, your friends, your money, then you'll be alone.",
+        "position": 18,
+        "grade": 50,
+        "syllable_count": 25,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 19,
+      "fields": {
+        "verse": 1,
+        "content": "I'll take and I'll take, till you have nothing more to give.",
+        "position": 19,
+        "grade": 50,
+        "syllable_count": 15,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 20,
+      "fields": {
+        "verse": 1,
+        "content": "When I'm finished with you you'll be lucky to live.",
+        "position": 20,
+        "grade": 50,
+        "syllable_count": 14,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 21,
+      "fields": {
+        "verse": 1,
+        "content": "If you try me be warned this is no game.",
+        "position": 21,
+        "grade": 50,
+        "syllable_count": 12,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 22,
+      "fields": {
+        "verse": 1,
+        "content": "If given the chance, I'll drive you insane.",
+        "position": 22,
+        "grade": 50,
+        "syllable_count": 12,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 23,
+      "fields": {
+        "verse": 1,
+        "content": "I'll ravish your body, I'll control your mind.",
+        "position": 23,
+        "grade": 50,
+        "syllable_count": 11,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 24,
+      "fields": {
+        "verse": 1,
+        "content": "I'll own you completely; your soul will be mine.",
+        "position": 24,
+        "grade": 50,
+        "syllable_count": 13,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 25,
+      "fields": {
+        "verse": 1,
+        "content": "The nightmares I'll give you while lying in bed.",
+        "position": 25,
+        "grade": 50,
+        "syllable_count": 11,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 26,
+      "fields": {
+        "verse": 1,
+        "content": "The voices you'll hear from inside your head.",
+        "position": 26,
+        "grade": 50,
+        "syllable_count": 10,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 27,
+      "fields": {
+        "verse": 1,
+        "content": "The sweats, the shakes, the visions are you'll see.",
+        "position": 27,
+        "grade": 50,
+        "syllable_count": 11,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 28,
+      "fields": {
+        "verse": 1,
+        "content": "I want you to know, these are all gifts from me.",
+        "position": 28,
+        "grade": 50,
+        "syllable_count": 11,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 29,
+      "fields": {
+        "verse": 1,
+        "content": "But then it's too late, you'll know in your heart, that you are mine, and we shall not part.",
+        "position": 29,
+        "grade": 50,
+        "syllable_count": 21,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 30,
+      "fields": {
+        "verse": 1,
+        "content": "You'll regret that you tried me, they always do.",
+        "position": 30,
+        "grade": 50,
+        "syllable_count": 11,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 31,
+      "fields": {
+        "verse": 1,
+        "content": "But you came to me, not I to you.",
+        "position": 31,
+        "grade": 50,
+        "syllable_count": 9,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 32,
+      "fields": {
+        "verse": 1,
+        "content": "You knew this would happen.",
+        "position": 32,
+        "grade": 50,
+        "syllable_count": 6,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 33,
+      "fields": {
+        "verse": 1,
+        "content": "Many times you were told, but you challenged my power, and chose to be bold.",
+        "position": 33,
+        "grade": 50,
+        "syllable_count": 20,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 34,
+      "fields": {
+        "verse": 1,
+        "content": "You could have said no, and just walked away.",
+        "position": 34,
+        "grade": 50,
+        "syllable_count": 11,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 35,
+      "fields": {
+        "verse": 1,
+        "content": "If you could live that day over, now what you you say?",
+        "position": 35,
+        "grade": 50,
+        "syllable_count": 13,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 36,
+      "fields": {
+        "verse": 1,
+        "content": "I'll be your master, you will be my slave.",
+        "position": 36,
+        "grade": 50,
+        "syllable_count": 11,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 37,
+      "fields": {
+        "verse": 1,
+        "content": "I'll even go with you, when you go to your grave.",
+        "position": 37,
+        "grade": 50,
+        "syllable_count": 13,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 38,
+      "fields": {
+        "verse": 1,
+        "content": "Now that you have me, what will you do?",
+        "position": 38,
+        "grade": 50,
+        "syllable_count": 9,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 39,
+      "fields": {
+        "verse": 1,
+        "content": "Will you try me or not?",
+        "position": 39,
+        "grade": 50,
+        "syllable_count": 6,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 40,
+      "fields": {
+        "verse": 1,
+        "content": "It's all up to you.",
+        "position": 40,
+        "grade": 50,
+        "syllable_count": 5,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 41,
+      "fields": {
+        "verse": 1,
+        "content": "I can bring you more misery than words can tell.",
+        "position": 41,
+        "grade": 50,
+        "syllable_count": 12,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 42,
+      "fields": {
+        "verse": 1,
+        "content": "Come take my hand, let me lead you to hell.",
+        "position": 42,
+        "grade": 50,
+        "syllable_count": 10,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 43,
+      "fields": {
+        "verse": 1,
+        "content": "Signed DRUGS",
+        "position": 43,
+        "grade": 50,
+        "syllable_count": 3,
+        "is_syllable_override": false
+      }
+    }
+  ]
+}

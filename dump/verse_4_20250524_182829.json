@@ -1,0 +1,63 @@
+{
+  "verse": {
+    "model": "versus.verse",
+    "pk": 4,
+    "fields": {
+      "title": "Fresh Aire by Mannheim Steamroller",
+      "slug": "fresh-aire-by-mannheim-steamroller",
+      "pattern": "",
+      "created_at": "2025-05-04T17:48:22.551Z",
+      "updated_at": "2025-05-04T17:48:22.551Z"
+    }
+  },
+  "lines": [
+    {
+      "model": "versus.verseline",
+      "pk": 259,
+      "fields": {
+        "verse": 4,
+        "content": "I am a Raindrop... and i fell, crystallized.",
+        "position": 1,
+        "grade": 50,
+        "syllable_count": 12,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 260,
+      "fields": {
+        "verse": 4,
+        "content": "One gray winter morning in the yesterday of your life...",
+        "position": 2,
+        "grade": 50,
+        "syllable_count": 15,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 261,
+      "fields": {
+        "verse": 4,
+        "content": "it was cold... so very cold... but the year was new and you had plans...",
+        "position": 3,
+        "grade": 50,
+        "syllable_count": 16,
+        "is_syllable_override": false
+      }
+    },
+    {
+      "model": "versus.verseline",
+      "pk": 262,
+      "fields": {
+        "verse": 4,
+        "content": "and",
+        "position": 4,
+        "grade": 50,
+        "syllable_count": 1,
+        "is_syllable_override": false
+      }
+    }
+  ]
+}
