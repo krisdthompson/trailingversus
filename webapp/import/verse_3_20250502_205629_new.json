@@ -1,0 +1,12 @@
+[
+  {
+    "model": "versus.verse",
+    "fields": {
+      "title": "Lars's Legacy",
+      "slug": "larss-legacy",
+      "pattern": "ab ab cc - sestets (6 lines) x 3 stanzas\r\nclose to 10 syllables per line",
+      "created_at": "2025-04-26T12:32:21.666Z",
+      "updated_at": "2025-04-26T14:57:21.521Z"
+    }
+  }
+] 
